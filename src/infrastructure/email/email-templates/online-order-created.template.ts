@@ -91,7 +91,7 @@ Items:
 ${itemsList}
 
 Subtotal: ${this.formatCurrency(data.subtotal)}
-${data.deliveryFee ? `Delivery Fee: ${this.formatCurrency(data.deliveryFee)}\n` : ""}${data.tax ? `Tax: ${this.formatCurrency(data.tax)}\n` : ""}Total: ${this.formatCurrency(data.total)}
+${data.deliveryFee ? `Delivery Fee: ${this.formatCurrency(data.deliveryFee)}\n` : ""}${`Service Charge: ${this.formatCurrency(data.serviceCharge)}\n`}${`Tax: ${this.formatCurrency(data.tax)}\n`}Total: ${this.formatCurrency(data.total)}
 
 IMPORTANT: Save this email — it's your only way to track this order and complete payment, since you checked out as a guest.
 
@@ -119,7 +119,7 @@ Items:
 ${itemsList}
 
 Subtotal: ${this.formatCurrency(data.subtotal)}
-${data.deliveryFee ? `Delivery Fee: ${this.formatCurrency(data.deliveryFee)}\n` : ""}${data.tax ? `Tax: ${this.formatCurrency(data.tax)}\n` : ""}Total: ${this.formatCurrency(data.total)}
+${data.deliveryFee ? `Delivery Fee: ${this.formatCurrency(data.deliveryFee)}\n` : ""}${`Service Charge: ${this.formatCurrency(data.serviceCharge)}\n`}${`Tax: ${this.formatCurrency(data.tax)}\n`}Total: ${this.formatCurrency(data.total)}
 ${data.loyaltyPointsEarned ? `\nYou earned ${data.loyaltyPointsEarned} loyalty points on this order!\n` : ""}
 View your order: ${orderUrl}
 
@@ -165,7 +165,8 @@ The ${this.config.brandName} Team
       <table style="width: 100%; font-size: 14px; margin: 12px 0;">
         <tr><td style="padding: 2px 0;">Subtotal</td><td style="padding: 2px 0; text-align: right;">${this.formatCurrency(data.subtotal)}</td></tr>
         ${data.deliveryFee ? `<tr><td style="padding: 2px 0;">Delivery Fee</td><td style="padding: 2px 0; text-align: right;">${this.formatCurrency(data.deliveryFee)}</td></tr>` : ""}
-        ${data.tax ? `<tr><td style="padding: 2px 0;">Tax</td><td style="padding: 2px 0; text-align: right;">${this.formatCurrency(data.tax)}</td></tr>` : ""}
+        ${`<tr><td style="padding: 2px 0;">Service Charge</td><td style="padding: 2px 0; text-align: right;">${this.formatCurrency(data.serviceCharge)}</td></tr>`}
+        ${`<tr><td style="padding: 2px 0;">Tax</td><td style="padding: 2px 0; text-align: right;">${this.formatCurrency(data.tax)}</td></tr>`}
         <tr style="border-top: 2px solid #000000;"><td style="padding: 8px 0; font-weight: bold;">Total</td><td style="padding: 8px 0; text-align: right; font-weight: bold;">${this.formatCurrency(data.total)}</td></tr>
       </table>
     `;
