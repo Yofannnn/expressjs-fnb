@@ -82,13 +82,14 @@ export const SearchProductsSchema = z.object({
 });
 
 export const BrowseProductsSchema = z.object({
-  keyword: z.string().trim().min(1).max(100).optional(),
   categoryId: z.uuid().optional(),
   type: z.enum(Object.values(ProductType)).optional(),
   status: z.enum(Object.values(ProductStatus)).optional(),
   minPrice: z.coerce.number().nonnegative().optional(),
   maxPrice: z.coerce.number().nonnegative().optional(),
   sort: z.enum(Object.values(ProductSort)).default(ProductSort.NEWEST),
+  cursor: z.uuid().optional(),
+  limit: z.coerce.number().nonnegative().default(15),
 });
 
 export type CreateProductSchemaType = z.infer<typeof CreateProductSchema>;
