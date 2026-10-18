@@ -181,7 +181,7 @@ export class PrismaApplicationTokenRepositoryAdapter
         expiresAt: applicationToken.expires,
         tokenFingerprint: applicationToken.tokenFingerprint,
         identifier: applicationToken.identifier as string,
-        orderId: applicationToken.userId as string,
+        orderId: applicationToken.orderId as string,
         createdAt: applicationToken.createdAt,
         updatedAt: applicationToken.updatedAt,
       });
