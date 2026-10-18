@@ -23,8 +23,12 @@ export class OnlineOrderCreatedTemplate extends LayoutTemplate implements EmailT
 
   private generateHTML(recipient: Recipient, data: OnlineOrderCreatedData): string {
     const cta = data.isGuest
-      ? { label: "Complete Payment", url: `${this.config.clientUrl}/guest/online-orders?token=${data.guestToken}`, variant: "primary" as const }
-      : { label: "View Order", url: `${this.config.clientUrl}/orders/${data.orderId}`, variant: "primary" as const };
+      ? {
+          label: "Complete Payment",
+          url: `${this.config.clientUrl}/checkout/pay/${data.orderId}?guestToken=${data.guestToken}`,
+          variant: "primary" as const,
+        }
+      : { label: "View Order", url: `${this.config.clientUrl}/member/online-orders/${data.orderId}`, variant: "primary" as const };
 
     return this.getLayout({
       title: data.isGuest ? "Complete Your Payment" : "Order Confirmed",
@@ -72,7 +76,7 @@ export class OnlineOrderCreatedTemplate extends LayoutTemplate implements EmailT
       .join("\n");
 
     if (data.isGuest) {
-      const trackUrl = `${this.config.clientUrl}/guest/online-orders?token=${data.guestToken}`;
+      const trackUrl = `${this.config.clientUrl}/checkout/pay/${data.orderId}?guestToken=${data.guestToken}`;
 
       return `
 Complete Your Payment - ${this.config.brandName}
@@ -100,7 +104,7 @@ The ${this.config.brandName} Team
       `.trim();
     }
 
-    const orderUrl = `${this.config.clientUrl}/orders/${data.orderId}`;
+    const orderUrl = `${this.config.clientUrl}/member/online-orders/${data.orderId}`;
 
     return `
 Order Confirmed - ${this.config.brandName}

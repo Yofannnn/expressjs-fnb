@@ -21,7 +21,7 @@ export class GuestOrderTokenReissuedTemplate extends LayoutTemplate implements E
   }
 
   private generateHTML(recipient: Recipient, data: GuestOrderTokenReissuedData): string {
-    const trackUrl = `${this.config.clientUrl}/online-orders/${data.orderId}?guestToken=${data.guestToken}`;
+    const trackUrl = `${this.config.clientUrl}/guest/online-orders/${data.orderId}?guestToken=${data.guestToken}`;
 
     return this.getLayout({
       title: "Your Access Link Has Been Renewed",
@@ -49,7 +49,7 @@ export class GuestOrderTokenReissuedTemplate extends LayoutTemplate implements E
   }
 
   private generateText(recipient: Recipient, data: GuestOrderTokenReissuedData): string {
-    const trackUrl = `${this.config.clientUrl}/online-orders/${data.orderId}?guestToken=${data.guestToken}`;
+    const trackUrl = `${this.config.clientUrl}/guest/online-orders/${data.orderId}?guestToken=${data.guestToken}`;
 
     return `
 Your Access Link Has Been Renewed - ${this.config.brandName}
