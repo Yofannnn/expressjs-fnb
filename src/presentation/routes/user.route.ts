@@ -8,7 +8,7 @@ import { AuthenticatedRequest } from "../types/authenticated-request.type";
 const UserRouter: Router = Router();
 
 UserRouter.get(
-  "/profile",
+  "/me",
   rateLimitMiddleware(getDIContainer().apiRateLimit, USER_RATE_LIMIT_POLICY.GET_PROFILE),
   authMiddleware(getDIContainer().authTokenVerifier),
   (req, res) => getDIContainer().userController.getCurrentProfile(req as AuthenticatedRequest, res),

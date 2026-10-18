@@ -69,6 +69,7 @@ export class ProductCategoryController {
           mimeType: req.file.mimetype,
         } satisfies UploadFilePayload,
       }),
+      id: req.params.id,
     };
 
     const updateProductCategoryDto = this.validation.validate<UpdateProductCategorySchemaType>(UpdateProductCategorySchema, request);

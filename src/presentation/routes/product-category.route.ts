@@ -28,19 +28,19 @@ ProductCategoryRouter.post(
   (req, res) => getDIContainer().productCategoryController.create(req as AuthenticatedRequest, res),
 );
 
-ProductCategoryRouter.put(
-  "/:id",
-  uploadImage.single("image"),
-  rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_CATEGORY_RATE_LIMIT_POLICY.UPDATE_PRODUCT_CATEGORY),
-  authMiddleware(getDIContainer().authTokenVerifier),
-  (req, res) => getDIContainer().productCategoryController.update(req as AuthenticatedRequest, res),
-);
-
-ProductCategoryRouter.put(
-  "/:id/reorder",
+ProductCategoryRouter.patch(
+  "/reorder",
   rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_CATEGORY_RATE_LIMIT_POLICY.REORDER_PRODUCT_CATEGORIES),
   authMiddleware(getDIContainer().authTokenVerifier),
   (req, res) => getDIContainer().productCategoryController.reorder(req as AuthenticatedRequest, res),
+);
+
+ProductCategoryRouter.patch(
+  "/:id",
+  rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_CATEGORY_RATE_LIMIT_POLICY.UPDATE_PRODUCT_CATEGORY),
+  authMiddleware(getDIContainer().authTokenVerifier),
+  uploadImage.single("image"),
+  (req, res) => getDIContainer().productCategoryController.update(req as AuthenticatedRequest, res),
 );
 
 export default ProductCategoryRouter;

@@ -16,28 +16,28 @@ ProductRouter.post(
   (req, res) => getDIContainer().productController.create(req as AuthenticatedRequest, res),
 );
 
-ProductRouter.put(
+ProductRouter.patch(
   "/:id",
   rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_RATE_LIMIT_POLICY.UPDATE_PRODUCT),
   authMiddleware(getDIContainer().authTokenVerifier),
   (req, res) => getDIContainer().productController.update(req as AuthenticatedRequest, res),
 );
 
-ProductRouter.put(
+ProductRouter.patch(
   "/:id/stock",
   rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_RATE_LIMIT_POLICY.UPDATE_PRODUCT_STOCK),
   authMiddleware(getDIContainer().authTokenVerifier),
   (req, res) => getDIContainer().productController.updateStock(req as AuthenticatedRequest, res),
 );
 
-ProductRouter.put(
+ProductRouter.patch(
   "/:id/status",
   rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_RATE_LIMIT_POLICY.UPDATE_PRODUCT_STATUS),
   authMiddleware(getDIContainer().authTokenVerifier),
   (req, res) => getDIContainer().productController.updateStatus(req as AuthenticatedRequest, res),
 );
 
-ProductRouter.put(
+ProductRouter.patch(
   "/:id/images",
   rateLimitMiddleware(getDIContainer().apiRateLimit, PRODUCT_RATE_LIMIT_POLICY.UPDATE_PRODUCT_IMAGE),
   authMiddleware(getDIContainer().authTokenVerifier),

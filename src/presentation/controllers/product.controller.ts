@@ -78,8 +78,7 @@ export class ProductController {
   async update(req: AuthenticatedRequest, res: Response): Promise<Response> {
     const accessTokenPayload = req.auth;
 
-    const body = req.body;
-    const updateProductDto = this.validation.validate<UpdateProductSchemaType>(UpdateProductSchema, body);
+    const updateProductDto = this.validation.validate<UpdateProductSchemaType>(UpdateProductSchema, { ...req.body, id: req.params.id });
     const result = await this.updateProductUseCase.execute({
       userId: accessTokenPayload.sub,
       userRole: accessTokenPayload.role,
@@ -92,8 +91,10 @@ export class ProductController {
   async updateStock(req: AuthenticatedRequest, res: Response): Promise<Response> {
     const accessTokenPayload = req.auth;
 
-    const body = req.body;
-    const updateProductStockDto = this.validation.validate<UpdateProductStockSchemaType>(UpdateProductStockSchema, body);
+    const updateProductStockDto = this.validation.validate<UpdateProductStockSchemaType>(UpdateProductStockSchema, {
+      ...req.body,
+      id: req.params.id,
+    });
     const result = await this.updateProductStockUseCase.execute({
       userId: accessTokenPayload.sub,
       userRole: accessTokenPayload.role,
@@ -106,8 +107,10 @@ export class ProductController {
   async updateStatus(req: AuthenticatedRequest, res: Response): Promise<Response> {
     const accessTokenPayload = req.auth;
 
-    const body = req.body;
-    const updateProductStatusDto = this.validation.validate<UpdateProductStatusSchemaType>(UpdateProductStatusSchema, body);
+    const updateProductStatusDto = this.validation.validate<UpdateProductStatusSchemaType>(UpdateProductStatusSchema, {
+      ...req.body,
+      id: req.params.id,
+    });
     const result = await this.updateProductStatusUseCase.execute({
       userId: accessTokenPayload.sub,
       userRole: accessTokenPayload.role,
@@ -122,6 +125,7 @@ export class ProductController {
 
     const request = {
       ...req.body,
+      id: req.params.id,
       imageFile: req.file
         ? {
             fileName: req.file.originalname,
