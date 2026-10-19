@@ -18,13 +18,13 @@ export class VerifyEmailUseCase implements VerifyEmailUseCasePort {
     private readonly logger: LoggerPort,
   ) {}
 
-  async execute({ verificationToken }: VerifyEmailCommand): Promise<VerifyEmailResult> {
+  async execute({ verifyEmailToken }: VerifyEmailCommand): Promise<VerifyEmailResult> {
     const startTime = Date.now();
 
     this.logEmailVerificationStart();
 
     const result = await this.uow.commit(async (repos) => {
-      const verificationEmailToken = await this.findVerificationEmail(verificationToken, repos.applicationTokenRepository);
+      const verificationEmailToken = await this.findVerificationEmail(verifyEmailToken, repos.applicationTokenRepository);
       const user = await this.findUser(verificationEmailToken.getUserId(), repos.userRepository);
 
       user.verifyEmail();

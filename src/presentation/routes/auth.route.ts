@@ -38,7 +38,7 @@ AuthRouter.post("/forgot-password", rateLimitMiddleware(getDIContainer().apiRate
   getDIContainer().authController.requestPasswordReset(req, res),
 );
 
-AuthRouter.get(
+AuthRouter.post(
   "/validate-reset-password",
   rateLimitMiddleware(getDIContainer().apiRateLimit, AUTH_RATE_LIMIT_POLICY.VALIDATE_RESET_TOKEN),
   (req, res) => getDIContainer().authController.validatePasswordResetRequest(req, res),

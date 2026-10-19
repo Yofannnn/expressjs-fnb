@@ -22,13 +22,13 @@ export class ResetPasswordUseCase implements ResetPasswordUseCasePort {
     private readonly logger: LoggerPort,
   ) {}
 
-  async execute({ resetToken, newPassword }: ResetPasswordCommand): Promise<void> {
+  async execute({ resetPasswordToken, newPassword }: ResetPasswordCommand): Promise<void> {
     const startTime = Date.now();
 
     this.logResetPasswordStart();
 
     const result = await this.uow.commit(async (repos) => {
-      const passwordResetToken = await this.findPasswordReset(resetToken, repos.applicationTokenRepository);
+      const passwordResetToken = await this.findPasswordReset(resetPasswordToken, repos.applicationTokenRepository);
       const user = await this.findUser(passwordResetToken.getUserId(), repos.userRepository);
 
       await this.processResetPassword(newPassword, user, passwordResetToken);

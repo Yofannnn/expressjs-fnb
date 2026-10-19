@@ -1,5 +1,5 @@
 export interface VerifyEmailCommand {
-  verificationToken: string;
+  verifyEmailToken: string;
 }
 export interface VerifyEmailResult {
   userId: string;

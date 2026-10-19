@@ -25,6 +25,10 @@ import {
   RegisterSchemaType,
   ResetPasswordSchema,
   ResetPasswordSchemaType,
+  ValidateResetTokenSchema,
+  ValidateResetTokenSchemaType,
+  VerifyEmailSchema,
+  VerifyEmailSchemaType,
 } from "@/presentation/validation/schemas/auth.schemas";
 
 export class AuthController {
@@ -95,8 +99,8 @@ export class AuthController {
   }
 
   async verifyEmail(req: Request, res: Response): Promise<Response> {
-    const token = req.query.token as string;
-    await this.verifyEmailUseCase.execute({ verificationToken: token });
+    const verifyEmailDto = this.validation.validate<VerifyEmailSchemaType>(VerifyEmailSchema, req.body);
+    await this.verifyEmailUseCase.execute(verifyEmailDto);
 
     return res.json({ message: "Email verified" });
   }
@@ -118,15 +122,15 @@ export class AuthController {
   }
 
   async validatePasswordResetRequest(req: Request, res: Response): Promise<Response> {
-    const token = req.query.token as string;
-    const result = await this.validateResetTokenUseCase.execute({ resetPasswordToken: token });
+    const validatePasswordResetDto = this.validation.validate<ValidateResetTokenSchemaType>(ValidateResetTokenSchema, req.body);
+    const result = await this.validateResetTokenUseCase.execute(validatePasswordResetDto);
 
     return res.json({ message: `Token is valid.`, data: result });
   }
 
   async resetPassword(req: Request, res: Response): Promise<Response> {
-    const validation = this.validation.validate<ResetPasswordSchemaType>(ResetPasswordSchema, req.body);
-    await this.resetPasswordUseCase.execute({ resetToken: validation.token, newPassword: validation.password });
+    const resetPasswordDto = this.validation.validate<ResetPasswordSchemaType>(ResetPasswordSchema, req.body);
+    await this.resetPasswordUseCase.execute(resetPasswordDto);
 
     return res.json({ message: "Password reset successfully" });
   }
