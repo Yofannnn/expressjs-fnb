@@ -30,4 +30,8 @@ export const env = {
       .map((v) => v.trim())
       .filter(Boolean);
   },
+  optionalString(key: string): string | undefined {
+    const value = process.env[key]?.trim();
+    return value ? value : undefined;
+  },
 };
