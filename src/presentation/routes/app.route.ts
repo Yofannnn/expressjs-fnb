@@ -1,4 +1,5 @@
 import { Application, Router } from "express";
+import DocsRouter from "./docs.route";
 import HealthRouter from "./health.route";
 import AuthRouter from "./auth.route";
 import UserRouter from "./user.route";
@@ -8,6 +9,7 @@ import OrderRouter from "./order.route";
 import PaymentRouter from "./payment.route";
 
 const _routes: Array<[string, Router]> = [
+  ["/docs", DocsRouter],
   ["/health", HealthRouter],
   ["/auth", AuthRouter],
   ["/users", UserRouter],
